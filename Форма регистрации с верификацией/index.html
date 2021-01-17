@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            border: 0;
+            box-sizing: border-box;
+        }
+        #wrap{
+            overflow: hidden;
+            width:100%;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        form{
+            min-width: 400px;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        form input{
+            display: block;
+            min-width: 200px;
+            padding: 10px 15px;
+            border:2px solid #000;
+            border-radius: 5px;
+            margin-top:10px;
+            font-size: 16px;
+        }
+        form input[type='submit']{
+            min-width: 120px;
+            padding: 10px 20px;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="wrap">
+        <form action="" name="reg" onsubmit="return verify(this)">
+            <input type="text" placeholder="Ваше имя" name="your_name">
+            <input type="text" placeholder="Email" name="your_email" >
+            <input type="text" placeholder="Номер телефона" name="your_tel">
+            <input type="text" placeholder="Пароль" name="your_pass">
+            <input type="submit" value="Подтвердить">
+        </form>
+    </div>
+    <script>
+        const f = document.forms.reg;
+
+        function verify(form){
+            let name_format = /^[A-Za-zА-Яа-я]([\wА-Яа-я]{7,19})$/,
+                e_format = /^([a-z0-9_\-]+\.)*[a-z0-9_-]+@[a-z0-9_\-]+(\.[a-z0-9_\-]+)*\.[a-z]{2,6}$/,
+                tel_format = /^(\s*)?(\+)?([- _():=+]?\d[- _():=+]?){10,14}(\s*)?$/,
+                pass_format = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{8,20}$/;
+
+            if (form.your_name.value == '' || !name_format.test(form.your_name.value)){
+                alert('Введите своё имя правильно!');
+                form.your_name.focus();
+                return false;
+            }
+
+            if (form.your_email.value == '' || !e_format.test(form.your_email.value)){
+                alert('Введите свой email правильно!');
+                form.your_email.focus();
+                return false;
+            };
+
+            if (form.your_tel.value == '' || !tel_format.test(form.your_tel.value)){
+                alert('Введите свой телефон правильно!');
+                form.your_tel.focus();
+                return false;
+            };
+
+            if (form.your_pass.value == '' || !pass_format.test(form.your_pass.value)){
+                alert('Введите свой пароль правильно!');
+                form.your_pass.focus();
+                return false;
+            };
+
+            return true;
+        }
+    </script>
+</body>
+
+</html>
